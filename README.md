@@ -15,3 +15,14 @@ Clasa "Graph" este o clasa care modeleaza graful si proprietatile sale (nr nodur
 Clasa "GraphPropertiesService" este clasa care se ocupa de business-logic-ul aplicatiei, determina proprietatile grafului.
 
 Clasa "LoggingFilter": A web filter that will log all requests received by input.jsp.
+
+# Laborator 3 - homework
+
+Accesand: http://localhost:8080/L3FINAL-1.0-SNAPSHOT/faces/projects.xhtml veti putea vedea proiectele. De asemenea veti putea adauga si sterge un proiect.
+Accesand: http://localhost:8080/L3FINAL-1.0-SNAPSHOT/faces/seeStudents.xhtml veti putea vedea studentii. De asemenea veti putea adauga, sterge un student, veti putea vedea ce proiecte au fost asociate acelui student, veti putea asocia un nou proiect studentului respectiv.
+
+Avem 3 tabele: student, project si project_student(Acest tabel este folosit pentru a realiza o asociere între studenți și proiecte)
+
+Fișierele xhtml sunt utilizate pentru definirea interfeței utilizatorului și a componentelor JSF. Ele conțin etichete specifice JSF, cum ar fi <h:form>, <p:dataTable>, <p:commandButton>, etc.
+
+Dialogurile create cu ajutorul componentelor p:dialog din PrimeFaces permit adăugarea de studenți și proiecte și afișarea detaliilor proiectelor asociate unui student.
