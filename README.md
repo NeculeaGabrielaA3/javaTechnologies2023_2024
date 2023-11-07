@@ -4,12 +4,19 @@ Repository for Java Technologies labs.
 # Laborator 4 - homework
 
 Am configurat un pool la baza de date și am creat un DataSource pentru a obține conexiuni la baza de date.
+
 Am creat cele doua sabloane: dataEdit.xhtml si dataView.xhtml.
+
 "page.xhtml": Pagina generală a aplicației cu antet (titlu și meniu), conținut și subsol (drepturi de autor și versiune). header-ul, footer-ul sunt în fișiere .xhtml distincte.
+
 "dataView.xhtml": Pagină generică pentru afișarea datelor sub formă de tabel.
+
 "dataEdit.xhtml": Pagină generică pentru editarea datelor, sub forma unui dialog cu un formular.
+
 studentView.xhtml si projectView.xhtml folosesc template-ul dataView.xhtml, plus lucruri necesare fiecareia.
+
 createStudent.xhtml si createProject.xhtml folosesc template-ul dataEdit.xhtml.
+
 Clasele StudentBean si ProjectBean sunt utilizate pentru managerierea studentilor, respectiv proiectelor.
 
 # Laborator 3 - homework
