@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+>
+<h:body>
+
+    <ui:composition template="/templates/dataView.xhtml">
+
+        <ui:param name="function" value="#{studentBean.getAllStudents()}"/>
+        <ui:param name="rowEdit" value="#{studentBean.updateRow}"/>
+        <ui:param name="rowCancel" value="#{studentBean.rowCancel}"/>
+
+        <ui:define name="dataview">
+
+            <p:column headerText="Id">
+                <h:outputText value="#{var.id}"/>
+            </p:column>
+
+            <p:column headerText="Name">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText value="#{var.name}" />
+                    </f:facet>
+                    <f:facet name="input">
+                        <p:inputText value="#{var.name}" style="width:100%" />
+                    </f:facet>
+                </p:cellEditor>
+            </p:column>
+
+            <p:column headerText="Delete Student">
+                <p:commandButton icon="pi pi-trash" title="Delete this student" actionListener="#{studentBean.deleteStudent(var.id)}" update="@form" />
+            </p:column>
+
+            <p:column headerText="View associated projects">
+<!--                <p:commandButton value="View projects" title="View associated projects"-->
+<!--                                 actionListener="#{studentBean.showAssociatedProjects(var.id)}"-->
+<!--                                 oncomplete="PF('projectDialog').show()" />-->
+                <h:form>
+                    <p:commandButton value="Show" type="button" icon="pi pi-external-link" onclick="PF('dlg2').show() "
+                                     styleClass="p-commandButton" />
+
+                    <p:dialog header="Show associated projects" widgetVar="dlg2" minHeight="40" width="600" showEffect="fade"
+                              modal="true" styleClass="p-dialog-content">
+                        <p:dataTable var="project" value="#{studentBean.getAssociatedProjects(var.id)}">
+                            <p:column headerText="Project ID">
+                                <h:outputText value="#{project.id}" />
+                            </p:column>
+                            <p:column headerText="Project Name">
+                                <h:outputText value="#{project.name}" />
+                            </p:column>
+                            <p:column headerText="Project Deadline">
+                                <h:outputText value="#{project.deadline}" />
+                            </p:column>
+                            <p:column headerText="Category">
+                                <h:outputText value="#{project.category}" />
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{project.description}" />
+                            </p:column>
+                        </p:dataTable>
+                    </p:dialog>
+                </h:form>
+            </p:column>
+
+        </ui:define>
+    </ui:composition>
+
+</h:body>
+
+</html>

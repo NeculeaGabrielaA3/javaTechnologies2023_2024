@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+
+<h:head>
+
+</h:head>
+
+<h:body>
+
+
+    <ui:composition template="/templates/dataEdit.xhtml">
+
+        <ui:param name="function" value="#{studentBean.saveStudent(student)}"/>
+        <ui:param name="back_page" value="studentList"/>
+
+        <ui:define name="dataEditContent">
+            <h:panelGrid id="bancaPanel" columns="2" cellpadding="5">
+                <p:outputLabel for="name" value="Name"/>
+                <p:inputText id="name" value="#{student.name}" />
+                <p:message for="name"/>
+            </h:panelGrid>
+        </ui:define>
+
+    </ui:composition>
+
+    <p:commandButton value="Go back" outcome="studentList" icon="pi pi-arrow-left" update="msg"/>
+</h:body>
+</html>

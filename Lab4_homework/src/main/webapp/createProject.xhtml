@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+
+<h:head>
+
+</h:head>
+
+<h:body>
+
+
+   <ui:composition template="/templates/dataEdit.xhtml">
+
+      <ui:param name="function" value="#{projectBean.createProject(project)}"/>
+
+      <ui:define name="dataEditContent">
+
+            <p>Create New Project:</p>
+            <p:outputLabel for="name" value="Name"/>
+            <p:inputText id="name" value="#{project.name}" required="true"/>
+            <p:message for="name"/>
+
+            <p:outputLabel for="category" value="category"/>
+            <p:inputText id="category" value="#{project.category}" required="true">
+            </p:inputText>
+            <p:message for="category"/>
+
+            <p:outputLabel for="projectDescription" value="Project description"/>
+            <p:inputTextarea id="projectDescription" value="#{project.description}" required="true">
+            </p:inputTextarea>
+            <p:message for="projectDescription"/>
+
+      </ui:define>
+
+   </ui:composition>
+
+</h:body>
+</html>
