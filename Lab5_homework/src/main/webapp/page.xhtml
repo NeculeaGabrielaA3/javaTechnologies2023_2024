@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+
+<h:head>
+    <style type="">
+        /* Style for the header section */
+        .header {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Style for the content section */
+        .content {
+            background-color: #ecf0f1;
+            padding: 20px;
+        }
+
+        /* Style for the footer section */
+        .footer {
+            background-color: #e74c3c;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</h:head>
+<h:body>
+
+    <div class="header">
+        <ui:insert name="header">
+            <ui:include src="/templates/header.xhtml"/>
+        </ui:insert>
+    </div>
+    <br/>
+
+    <div class="content">
+        <ui:insert name="content">
+            <ui:include src="/templates/contents.xhtml"/>
+        </ui:insert>
+    </div>
+    <br/>
+
+    <div class="footer">
+        <ui:insert name="footer">
+            <ui:include src="/templates/footer.xhtml"/>
+        </ui:insert>
+    </div>
+
+</h:body>
+</html>

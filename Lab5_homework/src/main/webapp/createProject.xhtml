@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<h:body>
+
+   <ui:composition template="/templates/dataEdit.xhtml">
+       <ui:param name="function" value="#{projectController.addProject()}"/>
+
+      <ui:define name="dataEditContent">
+
+            <p>Create New Project:</p>
+            <p:outputLabel for="name" value="Name"/>
+            <p:inputText id="name" value="#{projectController.name}" required="true"/>
+            <p:message for="name"/>
+
+            <p:outputLabel for="category" value="category"/>
+            <p:inputText id="category" value="#{projectController.category}" required="true">
+            </p:inputText>
+            <p:message for="category"/>
+
+            <p:outputLabel for="projectDescription" value="Project description"/>
+            <p:inputTextarea id="projectDescription" value="#{projectController.description}" required="true">
+            </p:inputTextarea>
+            <p:message for="projectDescription"/>
+
+           <p:calendar id="projectDeadline" value="#{projectController.deadline}" showOn="button" pattern="MM/dd/yyyy" placeholder="Select project deadline" />
+
+      </ui:define>
+
+   </ui:composition>
+
+</h:body>
+</html>

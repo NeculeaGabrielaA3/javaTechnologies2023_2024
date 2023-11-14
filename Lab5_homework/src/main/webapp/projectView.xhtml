@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+>
+
+<h:head>
+</h:head>
+<h:body>
+
+    <ui:composition template="/templates/dataView.xhtml">
+
+        <ui:param name="function" value="#{projectController.getAllProjects()}"/>
+
+        <ui:define name="dataview">
+
+            <p:column headerText="Id">
+                <h:outputText value="#{var.id}"/>
+            </p:column>
+
+            <p:column headerText="Name">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText value="#{var.name}" />
+                    </f:facet>
+                    <f:facet name="input">
+                        <p:inputText value="#{var.name}" style="width:100%" />
+                    </f:facet>
+                </p:cellEditor>
+            </p:column>
+
+            <p:column headerText="Category">
+                <h:outputText value="#{var.category}"/>
+            </p:column>
+
+            <p:column headerText="Description">
+                <h:outputText value="#{var.description}"/>
+            </p:column>
+
+            <p:column headerText="Deadline">
+                <h:outputText value="#{var.deadline}"/>
+            </p:column>
+
+            <p:column headerText="Delete Project">
+
+                <p:commandButton icon="pi pi-trash" title="Delete this project" actionListener="#{projectController.deleteById(var.id)}" update="@form" />
+
+            </p:column>
+
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>
