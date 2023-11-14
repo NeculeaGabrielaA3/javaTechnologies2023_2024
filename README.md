@@ -1,6 +1,8 @@
 # javaTechnologies2023_2024
 Repository for Java Technologies labs.
 
+# Laborator 5 - homework
+
 # Laborator 4 - homework
 
 Am configurat un pool la baza de date și am creat un DataSource pentru a obține conexiuni la baza de date.
