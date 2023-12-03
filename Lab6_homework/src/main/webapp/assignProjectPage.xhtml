@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Assign Projects</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .form-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 20px auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</h:head>
+<h:body>
+    <div class="form-container">
+        <h:form>
+            <h1>Project Assignment</h1>
+
+            <div class="form-group">
+                <h:outputLabel value="Select Student: " for="studentSelect" />
+                <h:selectOneMenu id="studentSelect" value="#{projectController.selectedStudentId}">
+                    <f:selectItem itemLabel="-- Select Student --" itemValue="" noSelectionOption="true"/>
+                    <f:selectItems value="#{studentController.allStudents}" var="student"
+                                   itemLabel="#{student.name}" itemValue="#{student.id}" />
+                </h:selectOneMenu>
+            </div>
+
+            <div class="form-group">
+                <h:outputLabel value="Select Project: " for="projectSelect" />
+                <h:selectOneMenu id="projectSelect" value="#{projectController.selectedProjectId}">
+                    <f:selectItem itemLabel="-- Select Project --" itemValue="" noSelectionOption="true"/>
+                    <f:selectItems value="#{projectController.allProjects}" var="project"
+                                   itemLabel="#{project.name}" itemValue="#{project.id}" />
+                </h:selectOneMenu>
+            </div>
+
+            <h:commandButton value="Assign Project" action="#{projectController.assignProjectToStudent}" />
+        </h:form>
+    </div>
+</h:body>
+</html>

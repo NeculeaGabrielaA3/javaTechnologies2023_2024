@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+>
+<h:body>
+
+    <ui:composition template="/templates/dataView.xhtml">
+
+        <ui:param name="function" value="#{assignmentTrackingBean.getAssignments()}"/>
+
+        <ui:define name="dataview">
+
+            <p:column headerText="Project ID">
+                <h:outputText value="#{var.key}" />
+            </p:column>
+            <p:column headerText="Student ID">
+                <h:outputText value="#{var.value}" />
+            </p:column>
+
+            <p:column headerText="Delete Assignment">
+                <p:commandButton icon="pi pi-trash" title="Delete this assignment" actionListener="#{assignmentTrackingBean.removeAssignment(var.key)}" update="@form" />
+            </p:column>
+
+        </ui:define>
+    </ui:composition>
+
+</h:body>
+
+</html>
