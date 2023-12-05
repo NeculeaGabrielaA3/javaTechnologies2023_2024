@@ -5,18 +5,21 @@ import com.example.demo.repository.ProjectRepository;
 import lombok.Getter;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.ConcurrencyManagement;
+import javax.ejb.ConcurrencyManagementType;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.inject.Named;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Getter
 @Singleton
 @Named
+@Getter
+@ConcurrencyManagement(ConcurrencyManagementType.CONTAINER)
 public class AssignmentTrackingBean {
+
     private Map<Long, Long> assignments;
 
     @EJB
@@ -28,6 +31,10 @@ public class AssignmentTrackingBean {
     @PostConstruct
     public void init() {
         assignments = new HashMap<>();
+        initializeAssignments();
+    }
+
+    private void initializeAssignments() {
         List<Project> assignedProjects = projectRepository.findAll();
         for (Project project : assignedProjects) {
             if (project.getStudent() != null) {
@@ -41,7 +48,7 @@ public class AssignmentTrackingBean {
     }
 
     public void removeAssignment(Long projectId) {
-        projectAssignmentBean.deleteAssignment(projectId);
+        projectRepository.removeAssignment(projectId);
         assignments.remove(projectId);
     }
 

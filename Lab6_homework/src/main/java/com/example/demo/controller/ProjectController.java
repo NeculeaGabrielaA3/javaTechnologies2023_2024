@@ -14,6 +14,7 @@ import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @Named
@@ -33,12 +34,20 @@ public class ProjectController {
     private AssignmentTrackingBean assignmentTrackingBean;
 
     private Long selectedProjectId;
-    private Long selectedStudentId;
 
     private String name;
     private String category;
     private String description;
     private Date deadline;
+
+    private List<Long> selectedProjectIds;
+    private Long selectedStudentId;
+
+    public void assignProjectsToStudent() {
+        projectAssignmentBean.setStudentId(selectedStudentId);
+        projectAssignmentBean.setProjectsId(selectedProjectIds);
+        projectAssignmentBean.save();
+    }
 
     public String addProject() {
         Project project = new Project();
@@ -48,31 +57,15 @@ public class ProjectController {
         project.setDescription(description);
 
         projectRepository.save(project);
-
         RedirectBean.redirectToViewProjects();
 
         return "success";
     }
-    public boolean isProjectAvailable(Long projectId) {
-        return projectAvailabilityBean.isProjectAvailable(projectId);
-    }
 
-    public void assignProjectToStudent() {
-        if (isProjectAvailable(selectedProjectId)) {
-            projectAssignmentBean.assignProjectToStudent(selectedProjectId, selectedStudentId);
-            assignmentTrackingBean.addAssignment(selectedProjectId, selectedStudentId);
-        }
-    }
-
-    public List<Project> getAssignedProjects(){
-        List<Project> result = new ArrayList<>();
-        List<Project> assignedProjects = projectRepository.findAll();
-        for (Project project : assignedProjects) {
-            if (project.getStudent() != null) {
-                result.add(project);
-            }
-        }
-        return result;
+    public List<Project> getUnassignedProject() {
+        return projectRepository.findAll().stream()
+                .filter(projectAvailabilityBean::isProjectAvailable)
+                .collect(Collectors.toList());
     }
 
     public List<Project> getAllProjects() {

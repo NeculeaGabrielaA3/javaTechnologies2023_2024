@@ -28,4 +28,12 @@ public class ProjectRepository {
             entityManager.remove(project);
     }
 
+    public void removeAssignment(Long projectId) {
+        Project project = entityManager.find(Project.class, projectId);
+        if (project != null) {
+            project.assignStudent(null);
+            entityManager.merge(project);
+        }
+    }
+
 }

@@ -66,7 +66,7 @@ public class RedirectBean {
         }
     }
 
-    public void redirectToViewAssignedProjectsPage() {
+    static public void redirectToViewAssignedProjectsPage() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
 
@@ -76,5 +76,7 @@ public class RedirectBean {
             e.printStackTrace();
         }
     }
+
+
 
 }

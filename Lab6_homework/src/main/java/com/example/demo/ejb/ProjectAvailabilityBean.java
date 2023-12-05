@@ -11,12 +11,12 @@ public class ProjectAvailabilityBean {
     @PersistenceContext(unitName = "StudentPU")
     private EntityManager entityManager;
 
-    public boolean isProjectAvailable(Long projectId) {
-        if (projectId == null) {
+    public boolean isProjectAvailable(Project project) {
+        if (project.getId() == null) {
             return false;
         }
-        Project project = entityManager.find(Project.class, projectId);
-        return project != null && project.getAssignedStudent() == null;
+        Project resultProject = entityManager.find(Project.class, project.getId());
+        return resultProject != null && project.getAssignedStudent() == null;
     }
 
 }
