@@ -3,17 +3,12 @@ package com.example.demo.ejb;
 import com.example.demo.RedirectBean;
 import com.example.demo.model.Project;
 import com.example.demo.model.Student;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;;
 
 import javax.ejb.*;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
 import java.util.List;
 
 @Stateful
