@@ -2,6 +2,7 @@ package com.example.demo.ejb;
 
 import com.example.demo.model.Project;
 import com.example.demo.repository.ProjectRepository;
+import lombok.Data;
 import lombok.Getter;
 
 import javax.annotation.PostConstruct;
@@ -16,7 +17,7 @@ import java.util.Map;
 
 @Singleton
 @Named
-@Getter
+@Data
 @ConcurrencyManagement(ConcurrencyManagementType.CONTAINER)
 public class AssignmentTrackingBean {
 
