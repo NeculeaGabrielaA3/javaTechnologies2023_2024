@@ -3,13 +3,9 @@ package com.example.demo.ejb;
 import com.example.demo.model.Project;
 import com.example.demo.repository.ProjectRepository;
 import lombok.Data;
-import lombok.Getter;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.ConcurrencyManagement;
-import javax.ejb.ConcurrencyManagementType;
-import javax.ejb.EJB;
-import javax.ejb.Singleton;
+import javax.ejb.*;
 import javax.inject.Named;
 import java.util.HashMap;
 import java.util.List;
@@ -44,10 +40,12 @@ public class AssignmentTrackingBean {
         }
     }
 
+    @Lock(LockType.WRITE)
     public void addAssignment(Long projectId, Long studentId) {
         assignments.put(projectId, studentId);
     }
 
+    @Lock(LockType.WRITE)
     public void removeAssignment(Long projectId) {
         projectRepository.removeAssignment(projectId);
         assignments.remove(projectId);
