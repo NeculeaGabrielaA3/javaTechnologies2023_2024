@@ -17,21 +17,18 @@ import java.io.Serializable;
     @AroundInvoke
     public Object logMethodEntry(InvocationContext invocationContext) throws Exception {
         String methodName = invocationContext.getMethod().getName();
-        if (methodName.equals("create") && invocationContext.getParameters()[0] instanceof Timetable) {
+        if (methodName.equals("create")) {
             Timetable timetable = (Timetable) invocationContext.getParameters()[0];
             System.out.println(timetable);
             String path = "C:\\Users\\Carmen\\Downloads\\Laborator7\\Laborator7\\src\\main\\java\\com\\example\\laborator7\\submissions.txt";
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, true))) {
                 writer.append(timetable.toString());
-                writer.append('\n');
+                writer.newLine();
             } catch (IOException e) {
-                //e.printStackTrace();
                 System.out.println("ERROR: " + e.getMessage());
             }
-            System.out.println("Timetable added: " + timetable);
         }
-        System.out.println("Timetable not added [interceptor]");
         return invocationContext.proceed();
     }
 

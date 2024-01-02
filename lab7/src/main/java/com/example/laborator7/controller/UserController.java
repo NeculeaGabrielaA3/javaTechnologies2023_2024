@@ -25,7 +25,6 @@ import java.util.logging.Logger;
 public class UserController implements Serializable {
     @Inject
     UserDaoImpl userDaoImpl;
-    private final Logger logger = Logger.getLogger(getClass().getName());
 
     public UserController() {
     }
@@ -35,11 +34,7 @@ public class UserController implements Serializable {
         try {
             userDaoImpl.create(userbean.ConvertToEntity());
             FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, "Error while registering the user");
-            addErrorMessage(e);
         } catch (Exception e) {
-            logger.log(Level.SEVERE, e.getMessage());
             addErrorMessage(e);
         }
     }
@@ -59,7 +54,6 @@ public class UserController implements Serializable {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("addTimetable.xhtml");
             }
         } catch (Exception e) {
-            logger.log(Level.SEVERE, e.getMessage());
             addErrorMessage(e);
         }
     }
@@ -76,7 +70,7 @@ public class UserController implements Serializable {
         }
     }
 
-    private void setCookie(String cookieName, String cookieValue) throws UnsupportedEncodingException {
+    private void setCookie(String cookieName, String cookieValue) {
         Map<String, Object> properties = new HashMap<>();
         properties.put("maxAge", 31536000);
         properties.put("path", "/");

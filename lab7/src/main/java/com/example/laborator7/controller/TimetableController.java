@@ -22,8 +22,6 @@ import java.util.Map;
 
 @RequestScoped
 @Named
-@Getter
-@Setter
 public class TimetableController implements Serializable {
 
     @Inject
@@ -32,15 +30,7 @@ public class TimetableController implements Serializable {
     private TimetableDao timetableDao;
 
     @Inject
-    @Named("registration")
     private Instance<String> registrationNumberInstance;
-
-    private Long id;
-    private User user;
-    private String dayOfWeek;
-    private String hourOfDay;
-    private String content;
-    private List<Timetable> timetables;
 
     public User getUser(){
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
@@ -49,13 +39,13 @@ public class TimetableController implements Serializable {
         if (cookiesMap.containsKey("user")) {
             Cookie userCookie = (Cookie) cookiesMap.get("user");
             String username = userCookie.getValue();
-            user = userDaoImpl.findByUsername(username);
+            //user = userDaoImpl.findByUsername(username);
             return userDaoImpl.findByUsername(username);
         }
         return null;
     }
 
-    @Logged
+
     public void create( TimetableBean timetableBean) {
 
         String registrationNumber = registrationNumberInstance.get();

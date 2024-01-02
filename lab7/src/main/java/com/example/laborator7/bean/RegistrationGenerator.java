@@ -9,7 +9,6 @@ import java.util.UUID;
 public class RegistrationGenerator {
 
     @Produces
-    @Named("registration")
     String getRegistrationNumber() {
         return UUID.randomUUID().toString();
     }

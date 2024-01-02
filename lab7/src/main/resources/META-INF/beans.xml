@@ -6,4 +6,7 @@
     <interceptors>
         <class>com.example.laborator7.interceptor.LoggedInterceptor</class>
     </interceptors>
+    <decorators>
+        <class>com.example.laborator7.decorator.DateVerificationDecorator</class>
+    </decorators>
 </beans>
