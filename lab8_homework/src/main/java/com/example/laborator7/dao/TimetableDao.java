@@ -7,8 +7,8 @@ import java.util.List;
 public interface TimetableDao {
     Timetable create(Timetable t) throws Exception;
     Timetable update(Timetable t);
-    Timetable get (Integer id);
+    Timetable get (Long id);
     List<Timetable> getAll();
-    void delete(Long id);
+    boolean delete(Long id);
     Timetable getByProperty(String query, String prop);
 }

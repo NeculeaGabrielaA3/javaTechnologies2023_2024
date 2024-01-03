@@ -24,18 +24,16 @@ public class Timetable implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String registrationNumber;
-
     @OneToOne
     private User teacher;
     private String content;
     private String dayOfWeek;
     private String hourOfDay;
 
-    public Timetable(String registrationNumber, User teacher, String content, String dayOfWeek, String hourOfDay) {
+    public Timetable(String registrationNumber, User user, String content, String dayOfWeek, String hourOfDay) {
         this.registrationNumber = registrationNumber;
-        this.teacher = teacher;
+        this.teacher = user;
         this.content = content;
         this.dayOfWeek = dayOfWeek;
         this.hourOfDay = hourOfDay;

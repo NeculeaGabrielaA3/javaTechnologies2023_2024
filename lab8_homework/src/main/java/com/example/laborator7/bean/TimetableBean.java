@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -19,10 +21,9 @@ import javax.validation.constraints.Size;
 @RequestScoped
 public class TimetableBean {
 
-    @NotNull
+
     private String registrationNumber;
-    @NotNull
-    private User user;
+    private User teacher;
     @Size(min = 4, max=30, message = "The name should have at least 4 characters.")
     private String content;
     @NotEmpty
@@ -35,6 +36,6 @@ public class TimetableBean {
     }
 
     public Timetable ConvertToEntity() {
-        return new Timetable(this.registrationNumber, this.user, this.content, this.dayOfWeek, this.hourOfDay);
+        return new Timetable(this.registrationNumber, this.teacher, this.content, this.dayOfWeek, this.hourOfDay);
     }
 }

@@ -32,21 +32,34 @@ public class TimetableDaoImpl implements TimetableDao {
         return timetable;
     }
 
-    @Override
-    public Timetable update(Timetable t) {
-        return null;
+    // In TimetableDaoImpl.java
+
+    public List<Timetable> getTimetablesForUser(Integer userId) {
+        return em.createQuery("SELECT t FROM Timetable t WHERE t.teacher.id = :userId", Timetable.class)
+                .setParameter("userId", userId)
+                .getResultList();
     }
 
     @Override
-    public Timetable get(Integer id) {
-        return null;
+    public Timetable update(Timetable timetable) {
+        return em.merge(timetable);
     }
 
+
     @Override
-    public void delete(Long id) {
+    public Timetable get(Long id) {
+        return em.find(Timetable.class, id);
+    }
+
+
+    @Override
+    public boolean delete(Long id) {
         Object reference = em.getReference(Timetable.class, id);
-        if(reference != null)
+        if(reference != null) {
             em.remove(reference);
+            return true;
+        }
+        return false;
     }
 
     @Override
