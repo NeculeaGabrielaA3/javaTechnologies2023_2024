@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Login</title>
+    <style type="">
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .footer {
+            background-color: #e74c3c;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</h:head>
+<h:body>
+
+    <div class="header">
+        <ui:insert name="header">
+            <ui:include src="/WEB-INF/header.xhtml"/>
+        </ui:insert>
+    </div>
+
+    <div class="main-content">
+        <h:form style="margin-top: 10px;">
+            <h:panelGrid styleClass="form-panel" columns="1">
+                <p:outputLabel>Username</p:outputLabel>
+                <p:inputText value="#{userBean.username}" id="username"
+                             required="true" requiredMessage="You must enter a username"/>
+                <p:message for="username"/>
+
+                <p:outputLabel>Password</p:outputLabel>
+                <p:password value="#{userBean.password}" id="password"
+                            required="true" requiredMessage="You must enter a password"/>
+                <p:message for="password"/>
+
+                <p:messages id="errors" style="color: red"/>
+
+
+                <p:commandButton value="Login" update="@form" action="#{userController.login(userBean)}" />
+
+            </h:panelGrid>
+        </h:form>
+    </div>
+
+    <div class="footer">
+        <ui:insert name="footer">
+            <ui:include src="/WEB-INF/footer.xhtml"/>
+        </ui:insert>
+    </div>
+
+</h:body>
+</html>

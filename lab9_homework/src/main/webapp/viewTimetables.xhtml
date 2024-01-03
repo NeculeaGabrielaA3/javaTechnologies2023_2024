@@ -1,0 +1,128 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>View timetables as Admin</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .header, .footer {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .footer {
+            background-color: #e74c3c;
+            margin-top: auto;
+            text-align: center;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .panel-grid {
+            margin: auto;
+            width: 80%;
+            background-color: #ffffff;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .panel-group {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .table-style {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .table-style th, .table-style td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        .table-style th {
+            background-color: #eeeeee;
+        }
+
+        .not-authorized {
+            color: red;
+            font-size: large;
+            font-weight: bold;
+        }
+    </style>
+</h:head>
+<h:body>
+    <div class="header">
+        <ui:insert name="header">
+            <ui:include src="/WEB-INF/header.xhtml"/>
+        </ui:insert>
+    </div>
+
+    <div class="main-content">
+
+        <p:panelGrid layout="grid" columns="1" styleClass="panel-grid" rendered="#{cookie['isAdmin'].value == 'true'}">
+
+            <h:form>
+                <p:dataTable id="dataTableId" styleClass="table-style" value="#{timetableController.getAllTimetablePreferences()}" var="var" border="1" lazy="false">
+                    <p:column>
+                        <f:facet name="header">Id</f:facet>
+                        #{var.id}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Registration Number</f:facet>
+                        #{var.registrationNumber}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Name</f:facet>
+                        #{var.content}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Day of week</f:facet>
+                        #{var.dayOfWeek}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Hour</f:facet>
+                        #{var.hourOfDay}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Actions</f:facet>
+                        <p:commandButton value="Delete" action="#{timetableController.delete(var.id)}"
+                                         update="dataTableId"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:panelGrid>
+        <h:panelGroup styleClass="panel-group" rendered="#{cookie['isAdmin'].value != 'true'}">
+            <h:outputText styleClass="not-authorized" value="You are not authorized to view this content." style="color:red; font-size:large;"/>
+        </h:panelGroup>
+    </div>
+    <div class="footer">
+        <ui:insert name="footer">
+            <ui:include src="/WEB-INF/footer.xhtml"/>
+        </ui:insert>
+    </div>
+
+</h:body>
+
+</ui:composition>
