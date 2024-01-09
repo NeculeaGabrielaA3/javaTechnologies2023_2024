@@ -10,8 +10,8 @@ Repository for Java Technologies labs.
   - updateTimetable(PUT) : se modifica o resursa
   - getTimetableForUser(GET) : returneaza timetable-urile specifice unui anumit user
   - getAllTimetables(GET) : returneaza toate timetable-urile
-      Am adăugat suport pentru documentație folosind pachetul OpenApi. Documentația poate fi găsită la http://localhost:8080/openapi, apoi trebuie să copiați json-ul generat și să-l postați într-un editor online precum https://editor.swagger.io/, unde veți vedea toate 
-   informațiile despre API. Am adăugat informații despre fiecare metodă, o descriere scurtă, detalii despre tipul cererii și răspunsului pentru a fi mai specific și codurile de stare care ar trebui returnate în situații specifice.
+Am adăugat suport pentru documentație folosind pachetul OpenApi. Documentația poate fi găsită la http://localhost:8080/openapi, apoi trebuie să copiați json-ul generat și să-l postați într-un editor online precum https://editor.swagger.io/, unde veți vedea toate 
+informațiile despre API. Am adăugat informații despre fiecare metodă, o descriere scurtă, detalii despre tipul cererii și răspunsului pentru a fi mai specific și codurile de stare care ar trebui returnate în situații specifice.
   
   # Exercitiul 2:
   De asemenea, am creat un filtru CacheDFilter care funcționează ca un cache pentru lista de timetables. Când se face o cerere, se verifică lista din cache pentru a vedea dacă este goală și, dacă da, se va obține răspunsul de la cerere, altfel se va returna direct 
