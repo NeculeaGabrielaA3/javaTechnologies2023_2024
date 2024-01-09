@@ -5,25 +5,25 @@ Repository for Java Technologies labs.
 
 # Exercitiul 1:
   - Am adaugat autentificare folosing realm, configurarile se pot vedea in web.xml, am creat doua roluri pt aplicatie: user si admin.
-  - Am adaugat constrangerile de securitate: doar userii ce au rolul de "user" vor putea accesa paginile ce au url "../users/..."; doar userii cu rolul de "admin" vor putea accesa paginile cu url-ul "../admin/..."
+  - Am adaugat constrangerile de securitate: doar userii ce au rolul de "user" vor putea accesa paginile ce au url "../user/..."; doar userii cu rolul de "admin" vor putea accesa paginile cu url-ul "../admin/..."
   (am creat un folder separat numit "admin", si unul numit "user", unde am plasat toate fișierele pentru rolul de admin, respectiv user. Dacă o restricție este încălcată, codul de stare 403 va fi trimis și pagina /forbidden.xhtml va fi afișată.
   - Securing the business logic components and REST services: am securizat TimetableResource prin adaugarea adnotarilor de tipul: @RolesAllowed pentru ca doar useri cu rolurile specificate sa poate face cereri pt endpoint-urile respective.
 
 # Laborator 8 - homework:
   # Exercitiul 1:
   
-   Pentru acest laborator am creat un serviciu web RESTful care implementează operațiunile CRUD pentru entitatea timetable. Serviciul se află în clasa TimetableResource și are următoarele metode:
+   Pentru acest laborator am creat un serviciu web RESTful care implementează operațiunile CRUD pentru entitatea timetable. Serviciul se află în clasa service/TimetableResource.java și are următoarele metode:
   - createTimetable(POST) : se creaza o noua resursa
   - deleteTimetable(DELETE) : se sterge o resursa
   - updateTimetable(PUT) : se modifica o resursa
   - getTimetableForUser(GET) : returneaza timetable-urile specifice unui anumit user
   - getAllTimetables(GET) : returneaza toate timetable-urile
     
-Am adăugat suport pentru documentație folosind pachetul OpenApi. Documentația poate fi găsită la http://localhost:8080/openapi, apoi trebuie să copiați json-ul generat și să-l postați într-un editor online precum https://editor.swagger.io/, unde veți vedea toate 
+Am adăugat suport pentru documentație folosind pachetul OpenApi(se poate observa tot in clasa TimetableResource). Documentația poate fi găsită la http://localhost:8080/openapi, apoi trebuie să copiați json-ul generat și să-l postați într-un editor online precum https://editor.swagger.io/, unde veți vedea toate 
 informațiile despre API. Am adăugat informații despre fiecare metodă, o descriere scurtă, detalii despre tipul cererii și răspunsului pentru a fi mai specific și codurile de stare care ar trebui returnate în situații specifice.
   
   # Exercitiul 2:
-  De asemenea, am creat un filtru CacheDFilter care funcționează ca un cache pentru lista de timetables. Când se face o cerere, se verifică lista din cache pentru a vedea dacă este goală și, dacă da, se va obține răspunsul de la cerere, altfel se va returna direct 
+  De asemenea, am creat un filtru CacheDFilter (din pachetul "filter") care funcționează ca un cache pentru lista de timetables. Când se face o cerere, se verifică lista din cache pentru a vedea dacă este goală și, dacă da, se va obține răspunsul de la cerere, altfel se va returna direct 
   lista existentă. Când un orar este creat/modificat/șters, lista devine nulă, astfel încât data viitoare când lista este necesară, aceasta va fi actualizată cu toate documentele din baza de date.
 
 # Laborator 4 - homework
