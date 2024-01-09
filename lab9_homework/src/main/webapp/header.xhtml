@@ -1,0 +1,50 @@
+<?xml version = "1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<head>
+    <style type="text/css">
+        .centered-panel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Adjust as needed */
+        }
+        button {
+            background-color: #640819; /* Teal color */
+            color: white;
+        }
+        button:hover {
+            background-color: #1d57c5; /* Darker teal */
+        }
+    </style>
+    <title>Header</title>
+</head>
+<body>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+
+    <f:view>
+        <div class="header">
+            <h1>Laborator 7</h1>
+        </div>
+    </f:view>
+    <div class="centered-panel">
+    <h:form>
+        <h:panelGrid columns="4">
+            <p:commandButton rendered="#{cookie['isAdmin'] != null}" value="Log out" action="#{userController.logout}"/>
+            <p:button rendered="#{cookie['isAdmin'] == null}" value="Log in" outcome="login"/>
+            <p:button  value="Register" outcome="register"/>
+        </h:panelGrid>
+    </h:form>
+    </div>
+
+</ui:composition>
+</body>
+</html>

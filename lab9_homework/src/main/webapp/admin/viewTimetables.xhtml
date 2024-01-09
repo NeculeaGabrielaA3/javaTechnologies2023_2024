@@ -75,13 +75,13 @@
 <h:body>
     <div class="header">
         <ui:insert name="header">
-            <ui:include src="/WEB-INF/header.xhtml"/>
+            <ui:include src="/header2.xhtml"/>
         </ui:insert>
     </div>
 
     <div class="main-content">
 
-        <p:panelGrid layout="grid" columns="1" styleClass="panel-grid" rendered="#{cookie['isAdmin'].value == 'true'}">
+        <p:panelGrid layout="grid" columns="1" styleClass="panel-grid" rendered="#{request.isUserInRole('admin')}">
 
             <h:form>
                 <p:dataTable id="dataTableId" styleClass="table-style" value="#{timetableController.getAllTimetablePreferences()}" var="var" border="1" lazy="false">
@@ -113,13 +113,13 @@
                 </p:dataTable>
             </h:form>
         </p:panelGrid>
-        <h:panelGroup styleClass="panel-group" rendered="#{cookie['isAdmin'].value != 'true'}">
+        <h:panelGroup styleClass="panel-group" rendered="#{not request.isUserInRole('admin')}">
             <h:outputText styleClass="not-authorized" value="You are not authorized to view this content." style="color:red; font-size:large;"/>
         </h:panelGroup>
     </div>
     <div class="footer">
         <ui:insert name="footer">
-            <ui:include src="/WEB-INF/footer.xhtml"/>
+            <ui:include src="/footer.xhtml"/>
         </ui:insert>
     </div>
 

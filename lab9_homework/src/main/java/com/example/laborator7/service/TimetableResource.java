@@ -2,29 +2,31 @@ package com.example.laborator7.service;
 
 import com.example.laborator7.bean.TimetableBean;
 import com.example.laborator7.dao.impl.TimetableDaoImpl;
-import com.example.laborator7.dao.impl.UserDaoImpl;
 import com.example.laborator7.entity.Timetable;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
 import java.util.List;
-import io.swagger.annotations.*;
 
 @Path("/timetables")
+@RolesAllowed({"admin", "user"})
 @ApplicationScoped
 @Produces(MediaType.APPLICATION_JSON)
 public class TimetableResource {
     @Inject
-    TimetableDaoImpl timetableDaoImpl;
-    @Inject
-    private UserDaoImpl userDaoImpl;
+    private TimetableDaoImpl timetableDaoImpl;
 
     @POST
+    @RolesAllowed("user")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.MULTIPART_FORM_DATA})
     @ApiOperation(value = "Creates a timetable",
             response = Timetable.class)
@@ -56,7 +58,8 @@ public class TimetableResource {
     }
 
     @GET
-    @Path("/user/{userId}")
+    @Path("/admin/{userId}")
+    @RolesAllowed("admin")
     @ApiOperation(value = "Get timetables for a user", notes = "Returns a list of timetables for the specified user.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Timetables found"),
@@ -72,6 +75,7 @@ public class TimetableResource {
 
     @PUT
     @Path("/{id}")
+    @RolesAllowed("admin")
     @Consumes(MediaType.APPLICATION_JSON)
     @ApiOperation(value = "Update an existing timetable", notes = "Updates the timetable with the given ID.")
     @ApiResponses(value = {
@@ -91,15 +95,4 @@ public class TimetableResource {
         return Response.ok(updatedTimetable).build();
     }
 
-    @GET
-    @Produces("text/plain")
-    public String getMessage() {
-        return "Timetables";
-    }
-
-    @PUT
-    @Consumes("text/plain")
-    public void setMessage(String msg) {
-
-    }
 }

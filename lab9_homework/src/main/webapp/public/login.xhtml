@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>Register</title>
+    <title>Login</title>
     <style type="">
         html, body {
             height: 100%;
@@ -41,40 +41,45 @@
     </style>
 </h:head>
 <h:body>
+
     <div class="header">
         <ui:insert name="header">
-            <ui:include src="/WEB-INF/header.xhtml"/>
+            <ui:include src="/header.xhtml"/>
         </ui:insert>
     </div>
 
+<!--    <form method="POST" action="j_security_check">-->
+<!--        Username: <input type="text" name="j_username" value="#{userBean.username}"/>-->
+<!--        Password: <input type="password" name="j_password" value="#{userBean.password}"/>-->
+
+<!--        <input type="submit" value="Login"/>-->
+<!--        <input type="reset" value="Reset" />-->
+<!--    </form>-->
+
     <div class="main-content">
         <h:form style="margin-top: 10px;">
-            <h:panelGrid columns="1">
+            <h:panelGrid styleClass="form-panel" columns="1">
                 <p:outputLabel>Username</p:outputLabel>
                 <p:inputText value="#{userBean.username}" id="username"
                              required="true" requiredMessage="You must enter a username"/>
                 <p:message for="username"/>
 
                 <p:outputLabel>Password</p:outputLabel>
-                <p:password  value="#{userBean.password}" id="password" match="pwd2"
-                             required="true" requiredMessage="You must enter a password"/>
+                <p:password value="#{userBean.password}" id="password"
+                            required="true" requiredMessage="You must enter a password"/>
                 <p:message for="password"/>
 
-                <p:outputLabel>Repeat Password</p:outputLabel>
-                <p:password  id="pwd2"
-                             required="true" requiredMessage="You must enter again the password"/>
-                <p:message for="pwd2"/>
-
-                <p:selectBooleanCheckbox  value="#{userBean.admin}" itemLabel="isAdmin"/>
                 <p:messages id="errors" style="color: red"/>
-                <p:commandButton value="Register" update="@form" action="#{userController.register(userBean)}"/>
+
+                <p:commandButton value="Login" update="@form" action="#{userController.login(userBean)}" />
+
             </h:panelGrid>
         </h:form>
     </div>
 
     <div class="footer">
         <ui:insert name="footer">
-            <ui:include src="/WEB-INF/footer.xhtml"/>
+            <ui:include src="/footer.xhtml"/>
         </ui:insert>
     </div>
 

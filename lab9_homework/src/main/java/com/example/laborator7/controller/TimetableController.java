@@ -5,34 +5,39 @@ import com.example.laborator7.dao.TimetableDao;
 import com.example.laborator7.dao.impl.UserDaoImpl;
 import com.example.laborator7.entity.Timetable;
 import com.example.laborator7.entity.User;
-import com.example.laborator7.filter.CachingFilter;
 
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Instance;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.client.Client;
 import javax.servlet.http.Cookie;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Filter;
 
+
 @ManagedBean(name = "timetableController")
 @RequestScoped
+//@RequestScoped
+//@Named
 public class TimetableController implements Serializable {
 
     @Inject
     private UserDaoImpl userDaoImpl;
     @Inject
     private TimetableDao timetableDao;
+    @Context
+    SecurityContext securityContext;
     private final Client client;
     public TimetableController() {
         client = ClientBuilder.newClient().register(Filter.class);;
@@ -53,8 +58,7 @@ public class TimetableController implements Serializable {
         return null;
     }
 
-
-    public void create( TimetableBean timetableBean) {
+    public void create(TimetableBean timetableBean) {
 
         String registrationNumber = registrationNumberInstance.get();
         timetableBean.setRegistrationNumber(registrationNumber);
@@ -91,4 +95,23 @@ public class TimetableController implements Serializable {
         return timetableDao.getAll();
     }
 
+    public void getTimetables() throws IOException {
+        FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = context.getExternalContext();
+        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+        if (!request.isUserInRole("admin")) {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("../forbidden.xhtml");
+        }
+
+        String timetableUri = "http://localhost:8080/Laborator7-1.0-SNAPSHOT/resources/timetables/admin/16";
+        Client client = ClientBuilder.newClient();
+        Response response = client.target(timetableUri)
+                .request(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .get();
+
+        response.close();
+        client.close();
+
+    }
 }

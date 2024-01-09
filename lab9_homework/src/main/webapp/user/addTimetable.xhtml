@@ -95,12 +95,12 @@
 <h:body>
     <div class="header">
         <ui:insert name="header">
-            <ui:include src="/WEB-INF/header.xhtml"/>
+            <ui:include src="/header2.xhtml"/>
         </ui:insert>
     </div>
     <div class="main-content">
         <h:form>
-            <h:panelGrid columns="1" styleClass="form-panel" rendered="#{cookie['isAdmin'].value == 'false'}">
+            <h:panelGrid columns="1" styleClass="form-panel" rendered="#{request.isUserInRole('user')}">
                 <h:outputLabel for="content">Name:</h:outputLabel>
                 <h:inputText id="content" value="#{timetableBean.content}" />
 
@@ -122,11 +122,14 @@
 
                 <h:commandButton value="Add Timetable" action="#{timetableController.create(timetableBean)}" />
             </h:panelGrid>
+            <h:panelGroup styleClass="panel-group" rendered="#{not request.isUserInRole('user')}">
+                <h:outputText styleClass="not-authorized" value="You are not authorized to view this content." style="color:red; font-size:large;"/>
+            </h:panelGroup>
         </h:form>
     </div>
     <div class="footer">
         <ui:insert name="footer">
-            <ui:include src="/WEB-INF/footer.xhtml"/>
+            <ui:include src="/footer.xhtml"/>
         </ui:insert>
     </div>
 </h:body>

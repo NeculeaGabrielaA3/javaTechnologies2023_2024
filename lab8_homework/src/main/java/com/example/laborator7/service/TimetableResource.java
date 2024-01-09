@@ -56,7 +56,7 @@ public class TimetableResource {
     }
 
     @GET
-    @Path("/user/{userId}")
+    @Path("/admin/{userId}")
     @ApiOperation(value = "Get timetables for a user", notes = "Returns a list of timetables for the specified user.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Timetables found"),
@@ -66,6 +66,20 @@ public class TimetableResource {
         List<Timetable> timetables = timetableDaoImpl.getTimetablesForUser(userId);
         if (timetables.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).entity("No timetables found for user with ID " + userId).build();
+        }
+        return Response.ok(timetables).build();
+    }
+
+    @GET
+    @ApiOperation(value = "Get timetables for a user", notes = "Returns a list of timetables for the specified user.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Timetables found."),
+            @ApiResponse(code = 404, message = "No timetables found .")
+    })
+    public Response getAllTimetables() {
+        List<Timetable> timetables = timetableDaoImpl.getAll();
+        if (timetables.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND).entity("No timetables found.").build();
         }
         return Response.ok(timetables).build();
     }
@@ -89,17 +103,5 @@ public class TimetableResource {
 
         Timetable updatedTimetable = timetableDaoImpl.update(existingTimetable);
         return Response.ok(updatedTimetable).build();
-    }
-
-    @GET
-    @Produces("text/plain")
-    public String getMessage() {
-        return "Timetables";
-    }
-
-    @PUT
-    @Consumes("text/plain")
-    public void setMessage(String msg) {
-
     }
 }

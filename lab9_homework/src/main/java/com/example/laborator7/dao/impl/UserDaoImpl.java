@@ -1,5 +1,6 @@
 package com.example.laborator7.dao.impl;
 
+import com.example.laborator7.entity.Group;
 import com.example.laborator7.entity.User;
 import com.example.laborator7.interceptor.Logged;
 
@@ -17,6 +18,7 @@ public class UserDaoImpl extends GenericDaoImpl<User> {
     public User create(User user) throws Exception {
         if (findByUsername(user.getUsername()) != null)
             throw new Exception("Username already exists");
+        //assignDefaultRole(createdUser);
         return super.create(user);
     }
 
@@ -54,7 +56,7 @@ public class UserDaoImpl extends GenericDaoImpl<User> {
     }
 
     public User findByUsername(String username) {
-
         return super.getByProperty("User.findByUsername", username);
     }
+
 }

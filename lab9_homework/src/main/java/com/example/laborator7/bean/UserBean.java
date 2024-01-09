@@ -16,12 +16,9 @@ public class UserBean {
     @NotNull
     @Size(min = 1, max = 50)
     private String username;
-
     @Size(min = 4, message = "The password should have at least 4 characters")
     private String password;
-
     private boolean admin;
-
     public UserBean() {
     }
 

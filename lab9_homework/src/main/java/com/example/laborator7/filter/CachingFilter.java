@@ -1,7 +1,6 @@
 package com.example.laborator7.filter;
 
 import com.example.laborator7.entity.Timetable;
-
 import javax.ws.rs.container.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -14,7 +13,6 @@ import java.util.logging.Logger;
 @Provider
 public class CachingFilter implements ContainerRequestFilter, ContainerResponseFilter {
     private static final Logger LOGGER = Logger.getLogger(CachingFilter.class.getName());
-
     private volatile List<Timetable> cachedTimetables = null;
 
     @Override
@@ -23,22 +21,25 @@ public class CachingFilter implements ContainerRequestFilter, ContainerResponseF
 
         if (cachedTimetables != null) {
             Response response = Response.ok(cachedTimetables, MediaType.APPLICATION_JSON).build();
+            LOGGER.info("[FILTER]The cache was used." );
             requestContext.abortWith(response);
         }
-        LOGGER.info("[FILTER]The cache was used." );
+
     }
 
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
         LOGGER.info("[FILTER]Response filter invoked for path: " + requestContext.getUriInfo().getPath() + ".");
-        LOGGER.info("[FILTER]Caching starting...");
+
         if (responseContext.getStatusInfo().getFamily() == Response.Status.Family.SUCCESSFUL && requestContext.getMethod().equalsIgnoreCase("GET")
                 && isRequestForTimetables(requestContext) && cachedTimetables == null) {
+            LOGGER.info("[FILTER]Caching starting...");
             Object entity = responseContext.getEntity();
             if (entity instanceof List<?>) {
                 cachedTimetables = new CopyOnWriteArrayList<>((List<Timetable>)entity);
             }
-        } else if(requestContext.getMethod().equalsIgnoreCase("POST") || requestContext.getMethod().equalsIgnoreCase("PUT") || requestContext.getMethod().equalsIgnoreCase("DELETE")) {
+        } else if(requestContext.getMethod().equalsIgnoreCase("POST") || requestContext.getMethod().equalsIgnoreCase("PUT")
+                || requestContext.getMethod().equalsIgnoreCase("DELETE")) {
             clearCache();
         }
     }

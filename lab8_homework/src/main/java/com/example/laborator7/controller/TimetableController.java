@@ -5,7 +5,6 @@ import com.example.laborator7.dao.TimetableDao;
 import com.example.laborator7.dao.impl.UserDaoImpl;
 import com.example.laborator7.entity.Timetable;
 import com.example.laborator7.entity.User;
-import com.example.laborator7.filter.CachingFilter;
 
 import javax.enterprise.inject.Instance;
 import javax.faces.application.FacesMessage;

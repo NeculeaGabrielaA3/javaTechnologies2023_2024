@@ -17,9 +17,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(HelloWorldResource.class);
         resources.add(TimetableResource.class);
-        //resources.add(CachingFilter.class);
     }
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();

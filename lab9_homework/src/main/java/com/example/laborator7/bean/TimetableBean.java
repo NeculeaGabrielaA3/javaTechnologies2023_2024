@@ -21,7 +21,6 @@ import javax.validation.constraints.Size;
 @RequestScoped
 public class TimetableBean {
 
-
     private String registrationNumber;
     private User teacher;
     @Size(min = 4, max=30, message = "The name should have at least 4 characters.")
@@ -32,7 +31,6 @@ public class TimetableBean {
     @Pattern(regexp = "^([01]?[0-9]|2[0-3]):[0-5][0-9]$")
     private String hourOfDay;
     public TimetableBean() {
-
     }
 
     public Timetable ConvertToEntity() {
