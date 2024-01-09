@@ -3,7 +3,7 @@ Repository for Java Technologies labs.
 
 # Laborator 8 - homework:
   # Exercitiul 1:
-      Pentru acest laborator am creat un serviciu web RESTful care implementează operațiunile CRUD pentru entitatea timetable. Serviciul se află în clasa TimetableResource și are următoarele metode:
+   Pentru acest laborator am creat un serviciu web RESTful care implementează operațiunile CRUD pentru entitatea timetable. Serviciul se află în clasa TimetableResource și are următoarele metode:
         - createTimetable(POST) : se creaza o noua resursa
         - deleteTimetable(DELETE) : se sterge o resursa
         - updateTimetable(PUT) : se modifica o resursa
@@ -13,7 +13,7 @@ Repository for Java Technologies labs.
    informațiile despre API. Am adăugat informații despre fiecare metodă, o descriere scurtă, detalii despre tipul cererii și răspunsului pentru a fi mai specific și codurile de stare care ar trebui returnate în situații specifice.
   
   # Exercitiul 2:
-    De asemenea, am creat un filtru CacheDFilter care funcționează ca un cache pentru lista de timetables. Când se face o cerere, se verifică lista din cache pentru a vedea dacă este goală și, dacă da, se va obține răspunsul de la cerere, altfel se va returna direct 
+  De asemenea, am creat un filtru CacheDFilter care funcționează ca un cache pentru lista de timetables. Când se face o cerere, se verifică lista din cache pentru a vedea dacă este goală și, dacă da, se va obține răspunsul de la cerere, altfel se va returna direct 
   lista existentă. Când un orar este creat/modificat/șters, lista devine nulă, astfel încât data viitoare când lista este necesară, aceasta va fi actualizată cu toate documentele din baza de date.
 
 # Laborator 4 - homework
