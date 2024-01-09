@@ -1,6 +1,14 @@
 # javaTechnologies2023_2024
 Repository for Java Technologies labs.
 
+# Laborator 9 - homework:
+
+# Exercitiul 1:
+  - Am adaugat autentificare folosing realm, configurarile se pot vedea in web.xml, am creat doua roluri pt aplicatie: user si admin.
+  - Am adaugat constrangerile de securitate: doar userii ce au rolul de "user" vor putea accesa paginile ce au url "../users/..."; doar userii cu rolul de "admin" vor putea accesa paginile cu url-ul "../admin/..."
+  (am creat un folder separat numit "admin", si unul numit "user", unde am plasat toate fișierele pentru rolul de admin, respectiv user. Dacă o restricție este încălcată, codul de stare 403 va fi trimis și pagina /forbidden.xhtml va fi afișată.
+  - Securing the business logic components and REST services: am securizat TimetableResource prin adaugarea adnotarilor de tipul: @RolesAllowed pentru ca doar useri cu rolurile specificate sa poate face cereri pt endpoint-urile respective.
+
 # Laborator 8 - homework:
   # Exercitiul 1:
   
